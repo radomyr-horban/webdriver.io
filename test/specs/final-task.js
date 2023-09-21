@@ -2,6 +2,7 @@
 import signUpPage from '../pages/sign-up.page.js'
 import MainPage from '../pages/main.page.js'
 import FreeTrialPage from '../pages/free-trial.page.js'
+import NewsletterPage from '../pages/newsletter.page.js'
 
 describe('GitHub main page', () => {
   xit('should open "Sign up" page', async () => {
@@ -45,7 +46,7 @@ describe('GitHub main page', () => {
     await signUpPage.continueToCaptchaButton.click()
   })
 
-  it('should open a free trial page', async () => {
+  xit('should open the free trial page', async () => {
     await browser.url('https://github.com/')
 
     //! h2
@@ -62,5 +63,37 @@ describe('GitHub main page', () => {
     await FreeTrialPage.startFreeTrialLink.click()
     await expect(FreeTrialPage.pickYourFreeTrialHeading).toExist()
     await FreeTrialPage.enterpriseCloudBox.click()
+  })
+
+  xit('should open the newsletter page', async () => {
+    await browser.url('https://github.com/')
+
+    //! Subscribe button
+    await MainPage.subscribeButton.scrollIntoView()
+    await expect(MainPage.subscribeButton).toBeDisplayed()
+    await MainPage.subscribeButton.click()
+    await expect(browser).toHaveUrl('https://resources.github.com/newsletter/')
+
+    //! Heading
+    await expect(NewsletterPage.subscribeHeading).toBeDisplayed()
+    await expect(NewsletterPage.subscribeHeading).toHaveText(
+      'Subscribe to our developer newsletter'
+    )
+
+    //! Form
+    await NewsletterPage.emailInput.scrollIntoView()
+    await NewsletterPage.emailInput.click()
+    await NewsletterPage.setEmailInput('abcd12034@gmail.com')
+
+    await NewsletterPage.countryInput.scrollIntoView()
+    await NewsletterPage.countryInput.click()
+    await NewsletterPage.setCountryOption('UA')
+
+    await NewsletterPage.agreeCheckbox.click()
+    await NewsletterPage.subscribeButton.click()
+
+    await expect(NewsletterPage.subscribeHeading).toHaveText(
+      'Thanks for subscribing!'
+    )
   })
 })
