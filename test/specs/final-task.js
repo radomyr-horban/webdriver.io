@@ -2,71 +2,44 @@
 import signUpPage from '../pages/sign-up.page.js'
 
 describe('GitHub main page', () => {
-  it('should open "Sign up" block', async () => {
+  it('should open "Sign up" page', async () => {
     await browser.url('https://github.com/')
 
-    //! sign-up box
     const signUpLink = await $('a.HeaderMenu-link--sign-up')
     await signUpLink.click()
 
-    const signUpIntroText = await $('span[data-target="typing-effect.content"]')
-    // await signUpBlock.waitForDisplayed({ timeout: 10000 })
-    await expect(signUpIntroText).toHaveTextContaining(
+    //! sign-up box
+    await expect(signUpPage.signUpIntroText).toHaveTextContaining(
       'Welcome to GitHub!',
       'Let’s begin the adventure'
     )
 
     //! email
-    const emailInputField = await $('input[aria-describedby="email-err"]')
-
-    // await signUpPage.emailInputField.waitForDisplayed()
-    // await emailInputField.setValue('abcd12034@gmail.com')
+    await signUpPage.emailInputField.waitForDisplayed()
     await signUpPage.setEmailInputField('abcd12034@gmail.com')
 
-    const continueToPasswordButton = await $(
-      'button[data-continue-to="password-container"]'
-    )
-    await continueToPasswordButton.waitUntil(async function () {
-      return await this.isEnabled()
-    })
-    await continueToPasswordButton.click()
+    await signUpPage.continueToPasswordButton.waitForEnabled()
+    await signUpPage.continueToPasswordButton.click()
 
-    // //! password
-    // const passwordInputField = await $('input[aria-describedby="password-err"]')
-    // await passwordInputField.waitForDisplayed()
-    // await passwordInputField.setValue('very-strong-pass123')
+    //! password
+    await signUpPage.passwordInputField.waitForDisplayed()
+    await signUpPage.setPasswordInputField('very-strong-pass123')
 
-    // const continueToUsernameButton = await $(
-    //   'button[data-continue-to="username-container"]'
-    // )
+    await signUpPage.continueToUsernameButton.waitForEnabled()
+    await signUpPage.continueToUsernameButton.click()
 
-    // await continueToUsernameButton.waitUntil(async function () {
-    //   return await this.isEnabled()
-    // })
-    // await continueToUsernameButton.click()
+    //! username
+    await signUpPage.usernameInputField.waitForDisplayed()
+    await signUpPage.setUsernameInputField('Thomas-469725')
 
-    // //! username
-    // const usernameInputField = await $('input[aria-describedby="login-err"]')
-    // await usernameInputField.setValue('Thomas-469725')
+    await signUpPage.continueToOptInContainerButton.waitForEnabled()
+    await signUpPage.continueToOptInContainerButton.click()
 
-    // const continueToOptInContainerButton = await $(
-    //   'button[data-continue-to="opt-in-container"]'
-    // )
-    // await continueToOptInContainerButton.waitUntil(async function () {
-    //   return await this.isEnabled()
-    // })
-    // await continueToOptInContainerButton.click()
+    //! opt-in
+    await signUpPage.optInContainerField.waitForDisplayed()
+    await signUpPage.setOptInContainerField('n')
 
-    // // ! opt-in
-    // const optInContainerField = await $('input[name="opt_in"]')
-    // await optInContainerField.setValue('n')
-
-    // const continueToCaptchaButton = await $(
-    //   'button[data-continue-to="captcha-and-submit-container"]'
-    // )
-    // await continueToCaptchaButton.waitUntil(async function () {
-    //   return await this.isEnabled()
-    // })
-    // await continueToCaptchaButton.click()
+    await signUpPage.continueToCaptchaButton.waitForEnabled()
+    await signUpPage.continueToCaptchaButton.click()
   })
 })
