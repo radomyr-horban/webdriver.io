@@ -6,6 +6,7 @@ import MainPage from '../pages/main.page.js'
 import FreeTrialPage from '../pages/free-trial.page.js'
 import NewsletterPage from '../pages/newsletter.page.js'
 import SearchResultsPage from '../pages/search.results.page.js'
+import PricingPage from '../pages/pricing.page.js'
 
 describe('GitHub main page', () => {
   xit('should open "Sign up" page', async () => {
@@ -108,5 +109,24 @@ describe('GitHub main page', () => {
     await MainPage.setSearchInput('act')
     await browser.keys('Enter')
     await SearchResultsPage.isRepositoryTitleRelevant('act')
+  })
+
+  it('should open Pricing page', async () => {
+    await browser.url('https://github.com/')
+
+    //! Search field
+    await MainPage.pricingLink.click()
+
+    await expect(PricingPage.pricingHeading).toBeDisplayed()
+    await expect(PricingPage.pricingHeading).toHaveText(
+      'Get the complete developer platform.'
+    )
+
+    //! Compare all features
+    await PricingPage.compareAllFeaturesLink.scrollIntoView()
+    await PricingPage.compareAllFeaturesLink.click()
+
+    await PricingPage.compareAllFeaturesHeading.scrollIntoView()
+    await expect(PricingPage.compareAllFeaturesHeading).toBeDisplayed()
   })
 })

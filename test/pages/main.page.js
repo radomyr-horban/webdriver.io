@@ -17,6 +17,10 @@ class MainPage {
     return $('#query-builder-test')
   }
 
+  get pricingLink() {
+    return $('nav a[href="/pricing"]')
+  }
+
   async setSearchInput(value) {
     await this.searchInput.setValue(value)
   }
