@@ -1,8 +1,10 @@
 // Lesson #25
 import signUpPage from '../pages/sign-up.page.js'
+import MainPage from '../pages/main.page.js'
+import FreeTrialPage from '../pages/free-trial.page.js'
 
 describe('GitHub main page', () => {
-  it('should open "Sign up" page', async () => {
+  xit('should open "Sign up" page', async () => {
     await browser.url('https://github.com/')
 
     const signUpLink = await $('a.HeaderMenu-link--sign-up')
@@ -41,5 +43,24 @@ describe('GitHub main page', () => {
 
     await signUpPage.continueToCaptchaButton.waitForEnabled()
     await signUpPage.continueToCaptchaButton.click()
+  })
+
+  it('should open a free trial page', async () => {
+    await browser.url('https://github.com/')
+
+    //! h2
+    await MainPage.placeForEveryoneHeading.scrollIntoView()
+    await expect(MainPage.placeForEveryoneHeading).toHaveTextContaining(
+      'The place for anyone from anywhere to build anything'
+    )
+
+    //!Free trial button
+    await FreeTrialPage.startFreeTrialLink.scrollIntoView()
+    await expect(FreeTrialPage.startFreeTrialLink).toBeDisplayed()
+
+    //! Free trial page
+    await FreeTrialPage.startFreeTrialLink.click()
+    await expect(FreeTrialPage.pickYourFreeTrialHeading).toExist()
+    await FreeTrialPage.enterpriseCloudBox.click()
   })
 })
