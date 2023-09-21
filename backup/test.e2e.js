@@ -1,6 +1,6 @@
 import { expect } from '@wdio/globals'
 
-describe('Webdriver main page', () => {
+describe.skip('Webdriver main page', () => {
   xit('should have correct title', async () => {
     await browser.url('https://webdriver.io/')
 
