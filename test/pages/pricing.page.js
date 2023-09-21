@@ -1,14 +1,14 @@
 class PricingPage {
-  get pricingHeading() {
-    return $('h1.h2-mktg')
+  get compareAllFeaturesHeading() {
+    return $('//h1[text() = "Compare features"]')
   }
 
   get compareAllFeaturesLink() {
     return $('a[href="#compare-features"]')
   }
 
-  get compareAllFeaturesHeading() {
-    return $('//h1[text() = "Compare features"]')
+  get pricingHeading() {
+    return $('h1.h2-mktg')
   }
 
   async setCountryOption(value) {

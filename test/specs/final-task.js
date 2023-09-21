@@ -1,56 +1,52 @@
-// Lesson #25
-// import { Key } from 'webdriverio'
-
-import signUpPage from '../pages/sign-up.page.js'
-import MainPage from '../pages/main.page.js'
 import FreeTrialPage from '../pages/free-trial.page.js'
+import MainPage from '../pages/main.page.js'
 import NewsletterPage from '../pages/newsletter.page.js'
-import SearchResultsPage from '../pages/search.results.page.js'
 import PricingPage from '../pages/pricing.page.js'
+import SearchResultsPage from '../pages/search.results.page.js'
+import SignUpPage from '../pages/sign-up.page.js'
 
 describe('GitHub main page', () => {
-  xit('should open "Sign up" page', async () => {
+  it('should open "Sign up" page', async () => {
     await browser.url('https://github.com/')
 
-    const signUpLink = await $('a.HeaderMenu-link--sign-up')
-    await signUpLink.click()
+    await MainPage.signUpLink.click()
 
     //! sign-up box
-    await expect(signUpPage.signUpIntroText).toHaveTextContaining(
+    await expect(SignUpPage.signUpIntroText).toHaveTextContaining(
       'Welcome to GitHub!',
       'Let’s begin the adventure'
     )
 
     //! email
-    await signUpPage.emailInputField.waitForDisplayed()
-    await signUpPage.setEmailInputField('abcd12034@gmail.com')
+    await SignUpPage.emailInputField.waitForDisplayed()
+    await SignUpPage.setEmailInputField('abcd12034@gmail.com')
 
-    await signUpPage.continueToPasswordButton.waitForEnabled()
-    await signUpPage.continueToPasswordButton.click()
+    await SignUpPage.continueToPasswordButton.waitForEnabled()
+    await SignUpPage.continueToPasswordButton.click()
 
     //! password
-    await signUpPage.passwordInputField.waitForDisplayed()
-    await signUpPage.setPasswordInputField('very-strong-pass123')
+    await SignUpPage.passwordInputField.waitForDisplayed()
+    await SignUpPage.setPasswordInputField('very-strong-pass123')
 
-    await signUpPage.continueToUsernameButton.waitForEnabled()
-    await signUpPage.continueToUsernameButton.click()
+    await SignUpPage.continueToUsernameButton.waitForEnabled()
+    await SignUpPage.continueToUsernameButton.click()
 
     //! username
-    await signUpPage.usernameInputField.waitForDisplayed()
-    await signUpPage.setUsernameInputField('Thomas-469725')
+    await SignUpPage.usernameInputField.waitForDisplayed()
+    await SignUpPage.setUsernameInputField('Thomas-469725')
 
-    await signUpPage.continueToOptInContainerButton.waitForEnabled()
-    await signUpPage.continueToOptInContainerButton.click()
+    await SignUpPage.continueToOptInContainerButton.waitForEnabled()
+    await SignUpPage.continueToOptInContainerButton.click()
 
     //! opt-in
-    await signUpPage.optInContainerField.waitForDisplayed()
-    await signUpPage.setOptInContainerField('n')
+    await SignUpPage.optInContainerField.waitForDisplayed()
+    await SignUpPage.setOptInContainerField('n')
 
-    await signUpPage.continueToCaptchaButton.waitForEnabled()
-    await signUpPage.continueToCaptchaButton.click()
+    await SignUpPage.continueToCaptchaButton.waitForEnabled()
+    await SignUpPage.continueToCaptchaButton.click()
   })
 
-  xit('should open the free trial page', async () => {
+  it('should open the free trial page', async () => {
     await browser.url('https://github.com/')
 
     //! h2
@@ -69,7 +65,7 @@ describe('GitHub main page', () => {
     await FreeTrialPage.enterpriseCloudBox.click()
   })
 
-  xit('should open the newsletter page', async () => {
+  it('should open the newsletter page', async () => {
     await browser.url('https://github.com/')
 
     //! Subscribe button
@@ -101,7 +97,7 @@ describe('GitHub main page', () => {
     )
   })
 
-  xit('should show pages containing the searched text', async () => {
+  it('should show pages containing the searched text', async () => {
     await browser.url('https://github.com/')
 
     //! Search field

@@ -4,11 +4,11 @@ class MainPage {
       'h2[class="color-fg-default mb-3 h3-mktg col-lg-8 mx-md-auto px-3"]'
     )
   }
-  //! Subscribe button
-  get subscribeButton() {
-    return $('//a[normalize-space(text()) = "Subscribe"]')
+
+  get pricingLink() {
+    return $('nav a[href="/pricing"]')
   }
-  //! Search field
+
   get searchField() {
     return $('span[data-target="qbsearch-input.inputButtonText"]')
   }
@@ -17,8 +17,12 @@ class MainPage {
     return $('#query-builder-test')
   }
 
-  get pricingLink() {
-    return $('nav a[href="/pricing"]')
+  get signUpLink() {
+    return $('a.HeaderMenu-link--sign-up')
+  }
+
+  get subscribeButton() {
+    return $('//a[normalize-space(text()) = "Subscribe"]')
   }
 
   async setSearchInput(value) {

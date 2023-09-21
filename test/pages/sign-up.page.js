@@ -32,7 +32,7 @@ class SignUpPage {
     return $('button[data-continue-to="captcha-and-submit-container"]')
   }
 
-  //! methods
+  //! setters
   async setEmailInputField(value) {
     await this.emailInputField.setValue(value)
   }
