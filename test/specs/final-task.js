@@ -1,8 +1,11 @@
 // Lesson #25
+// import { Key } from 'webdriverio'
+
 import signUpPage from '../pages/sign-up.page.js'
 import MainPage from '../pages/main.page.js'
 import FreeTrialPage from '../pages/free-trial.page.js'
 import NewsletterPage from '../pages/newsletter.page.js'
+import SearchResultsPage from '../pages/search.results.page.js'
 
 describe('GitHub main page', () => {
   xit('should open "Sign up" page', async () => {
@@ -95,5 +98,15 @@ describe('GitHub main page', () => {
     await expect(NewsletterPage.subscribeHeading).toHaveText(
       'Thanks for subscribing!'
     )
+  })
+
+  xit('should show pages containing the searched text', async () => {
+    await browser.url('https://github.com/')
+
+    //! Search field
+    await MainPage.searchField.click()
+    await MainPage.setSearchInput('act')
+    await browser.keys('Enter')
+    await SearchResultsPage.isRepositoryTitleRelevant('act')
   })
 })

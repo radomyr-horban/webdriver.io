@@ -8,6 +8,18 @@ class MainPage {
   get subscribeButton() {
     return $('//a[normalize-space(text()) = "Subscribe"]')
   }
+  //! Search field
+  get searchField() {
+    return $('span[data-target="qbsearch-input.inputButtonText"]')
+  }
+
+  get searchInput() {
+    return $('#query-builder-test')
+  }
+
+  async setSearchInput(value) {
+    await this.searchInput.setValue(value)
+  }
 }
 
 export default new MainPage()
