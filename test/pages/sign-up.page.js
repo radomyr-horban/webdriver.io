@@ -1,10 +1,8 @@
 class SignUpPage {
-  //! sign up box
   get signUpIntroText() {
     return $('span[data-target="typing-effect.content"]')
   }
 
-  //! input fields
   get emailInputField() {
     return $('input[aria-describedby="email-err"]')
   }
@@ -18,21 +16,32 @@ class SignUpPage {
     return $('input[name="opt_in"]')
   }
 
-  //! continue buttons
   get continueToPasswordButton() {
     return $('button[data-continue-to="password-container"]')
   }
   get continueToUsernameButton() {
     return $('button[data-continue-to="username-container"]')
   }
-  get continueToOptInContainerButton() {
+  get continueToOptInButton() {
     return $('button[data-continue-to="opt-in-container"]')
   }
   get continueToCaptchaButton() {
     return $('button[data-continue-to="captcha-and-submit-container"]')
   }
 
-  //! setters
+  async clickOnContinueToPasswordButton() {
+    await this.continueToPasswordButton.click()
+  }
+  async clickOnContinueToUsernameButton() {
+    await this.continueToUsernameButton.click()
+  }
+  async clickOnContinueToOptInButton() {
+    await this.continueToOptInButton.click()
+  }
+  async clickOnContinueToCaptchaButton() {
+    await this.continueToCaptchaButton.click()
+  }
+
   async setEmailInputField(value) {
     await this.emailInputField.setValue(value)
   }
